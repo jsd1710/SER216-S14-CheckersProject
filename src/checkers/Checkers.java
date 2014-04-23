@@ -44,6 +44,7 @@ public class Checkers
 
     //Prepares the help menu (this is set visible once the help button has been clicked).
     Help helpMenu = new Help();
+    GameWin winner;
 
     //ComboBox for selecting the different difficulty levels.
     JLabel difficultyLabel = new JLabel("Difficulty Level");
@@ -253,6 +254,7 @@ public class Checkers
         g.drawLine(400, 0, 400, 400);
         drawCheckers();
     }
+    
 
     public void actionPerformed(ActionEvent e) 
     {
@@ -295,12 +297,38 @@ public class Checkers
         }
         if(e.getActionCommand().equalsIgnoreCase("New Game"))
         {
+        	if (winner != null)
+    		{
+    			winner.dispose();
+    		}
             new PlaySound("src/sounds/button.wav").start();
             newGame();
         }
+        if(e.getActionCommand().equalsIgnoreCase("Start New Game"))
+        {
+        	if (winner != null)
+        	{
+        		winner.dispose();
+        	}
+        	new PlaySound("src/sounds/button.wav").start();
+            newGame();
+        }
+        if(e.getActionCommand().equalsIgnoreCase("Undo Previous Game") && undoCount > 3 && difficulty != 4)
+        {
+        	won = 0;
+        	loser = EMPTY;
+        	undo();
+        	winner.dispose();
+        }
         if(e.getActionCommand().equalsIgnoreCase("Undo") && undoCount>3)
         {
-            new PlaySound("src/sounds/button.wav").start();
+        	if (winner != null)
+        	{
+        		winner.dispose();
+        	}
+        	won = 0;
+        	loser = EMPTY;
+        	new PlaySound("src/sounds/button.wav").start();
             undo();
         }
         if(e.getSource()==helpButton)
@@ -519,7 +547,11 @@ public class Checkers
     }
 
     public void itemStateChanged(ItemEvent e) 
-    {          
+    {         
+    	if (e.getStateChange() != difficulty && difficulty != 0)
+    	{
+    		messageBar.setText("Click 'New Game' to apply settings.");
+    	}
     }
 
     public void mousePressed(MouseEvent e) 
@@ -622,32 +654,70 @@ public class Checkers
             messageBar.setText("Yellow Wins!");
             try 
             {
-                Thread.sleep(150);
+                Thread.sleep(150*3);
             } 
             catch(InterruptedException e) 
             {
                 e.printStackTrace();
             }
-            new GameWin("Yellow",this.getLocationOnScreen());
+            winner = new GameWin("Red",this.getLocationOnScreen());
+            
+            JButton newGameWinButton = new JButton("New Game");
+            newGameWinButton.setActionCommand("Start New Game");
+            newGameWinButton.setFocusPainted(false);
+            newGameWinButton.setFont(new Font("SansSerif",Font.BOLD,11));
+            newGameWinButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            newGameWinButton.addActionListener(this);
+            newGameWinButton.setBounds(2, 80, 92, 30);
+            
+            JButton undoPreviousGameButton = new JButton("Undo");
+            undoPreviousGameButton.setActionCommand("Undo Previous Game");
+            undoPreviousGameButton.setFocusPainted(false);
+            undoPreviousGameButton.setFont(new Font("SansSerif",Font.BOLD,11));
+            undoPreviousGameButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            undoPreviousGameButton.addActionListener(this);
+            undoPreviousGameButton.setBounds(100, 80, 92, 30);
+            
+            winner.add(newGameWinButton);
+            winner.add(undoPreviousGameButton);
             won=1;
-            undoCount=0;
-            newGame();
+            //undoCount=0;
+            //newGame();
         }
         else if (loser == YELLOWNORMAL && won==0)
         {
             messageBar.setText("Red Wins!");
             try 
             {
-                Thread.sleep(150);
+                Thread.sleep(150*3);
             } 
             catch(InterruptedException e) 
             {
                 e.printStackTrace();
             }            
-            new GameWin("Red",this.getLocationOnScreen());
+            winner = new GameWin("Red",this.getLocationOnScreen());
+            JButton newGameWinButton = new JButton("New Game");
+            newGameWinButton.setActionCommand("Start New Game");
+            newGameWinButton.setFocusPainted(false);
+            newGameWinButton.setFont(new Font("SansSerif",Font.BOLD,11));
+            newGameWinButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            newGameWinButton.addActionListener(this);
+            newGameWinButton.setBounds(2, 80, 92, 30);
+            
+            JButton undoPreviousGameButton = new JButton("Undo");
+            undoPreviousGameButton.setActionCommand("Undo Previous Game");
+            undoPreviousGameButton.setFocusPainted(false);
+            undoPreviousGameButton.setFont(new Font("SansSerif",Font.BOLD,11));
+            undoPreviousGameButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            undoPreviousGameButton.addActionListener(this);
+            undoPreviousGameButton.setBounds(100, 80, 92, 30);
+            
+            
+            winner.add(newGameWinButton);
+            winner.add(undoPreviousGameButton);
             won=1;
-            undoCount=0;
-            newGame();            
+            //undoCount=0;
+            //newGame();            
         }
     }
    // The AWT invokes the update() method in response to the repaint() method

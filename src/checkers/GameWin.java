@@ -8,25 +8,26 @@ import java.awt.*;
 public class GameWin extends JDialog
 {
     Point p;
-    JLabel masseage=new JLabel();
+    JLabel message=new JLabel();
     
     GameWin(String winner,Point p)
     {
         this.p=p;
-        masseage.setText("          "+winner+" Wins!");
+        message.setText("          "+winner+" Wins!");
         setupGUI();
 	}
 
-	private void setupGUI()
+	public void setupGUI()
 	{
         new PlaySound("src//sounds//Win.wav").start();
-        masseage.setFont(new Font("dialog",Font.BOLD,16));
-        add(masseage);
+        message.setFont(new Font("dialog",Font.BOLD,16));
+        message.setBounds(0, 10, 100, 20);
+        add(message);
 
         setAlwaysOnTop(true);
         setLocation((int)p.getX()+100,(int)p.getY()+200);
         setResizable(false);
-        setSize(200,80);
+        setSize(200,150);
         setTitle("Game Over");
         setVisible(true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
