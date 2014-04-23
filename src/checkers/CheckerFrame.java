@@ -52,7 +52,7 @@ public class CheckerFrame extends JFrame implements ActionListener
         stB.setBackground(Color.LIGHT_GRAY);
         //Converts the cursor from pointer to finger when moused over.
         stB.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
-        stB.setBounds(154,420,200,60); //Coordinates and size.
+        stB.setBounds(154,420,260,60); //Coordinates and size.
         stB.setFont(new Font("Times new roman",Font.BOLD,20));
         stB.addActionListener(this);
         /*
