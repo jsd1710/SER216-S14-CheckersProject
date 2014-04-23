@@ -13,46 +13,53 @@ public class Checkers
 
     Graphics g;
 
-    JTextArea msg = new JTextArea("Start a new game... Yellow is to move first...");
+    JTextArea messageBar = new JTextArea("To begin, click the 'New Game' button.");
     
-    //Buffered images for future use.
-    ImageIcon redN = new ImageIcon(new ImageIcon(getClass().getResource("/images/red_normal.jpg")).getImage());//red_normal.jpg
-    ImageIcon yellowN = new ImageIcon(new ImageIcon(getClass().getResource("/images/yellow_normal.jpg")).getImage());//yellow_normal.jpg
-    ImageIcon redK = new ImageIcon(new ImageIcon(getClass().getResource("/images/red_king.jpg")).getImage());//red_king.jpg
-    ImageIcon yellowK = new ImageIcon(new ImageIcon(getClass().getResource("/images/yellow_king.jpg")).getImage());//yellow_king.jpg
-    ImageIcon hlp = new ImageIcon(new ImageIcon(getClass().getResource("/images/help.jpg")).getImage());//help.jpg
-    ImageIcon snp = new ImageIcon(new ImageIcon(getClass().getResource("/images/sound.jpg")).getImage());//sound.jpg
-    ImageIcon mup = new ImageIcon(new ImageIcon(getClass().getResource("/images/mute.jpg")).getImage());//mute.jpg
+    //Buffered images for future use as icons.
+    ImageIcon redNormalIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/red_normal.jpg")).getImage());
+    ImageIcon yellowNormalIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/yellow_normal.jpg")).getImage());
+    ImageIcon redKingIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/red_king.jpg")).getImage());
+    ImageIcon yellowKingIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/yellow_king.jpg")).getImage());
+    ImageIcon helpIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/help.jpg")).getImage());
+    ImageIcon soundButtonIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/sound.jpg")).getImage());
+    ImageIcon muteButtonIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/mute.jpg")).getImage());
 
+    //Buttons for setting configurations.
+    JButton newGameButton = new JButton("New Game");
+    JButton undoButton = new JButton("Undo");
+    JButton helpButton = new JButton(helpIcon);
+    JButton soundButton = new JButton(soundButtonIcon);
+
+    //Buttons for selecting single-player or two-player modes.
+    JLabel modeLabel = new JLabel("Mode");
+    ButtonGroup playerButtons = new ButtonGroup();
+    JRadioButton p1RadioButton = new JRadioButton("1-Player", true);
+    JRadioButton p2RadioButton = new JRadioButton("2-Player", false);
+
+    //Buttons for selecting what color player would like to be in single-player mode.
+    JLabel colorLabel = new JLabel("Color");
+    ButtonGroup colorButtons = new ButtonGroup();
+    JRadioButton redRadioButton = new JRadioButton("Red", false);
+    JRadioButton yellowRadioButton = new JRadioButton("Yellow", true);
+
+    //Prepares the help menu (this is set visible once the help button has been clicked).
+    Help helpMenu = new Help();
+
+    //ComboBox for selecting the different difficulty levels.
+    JLabel difficultyLabel = new JLabel("Difficulty Level");
+    JComboBox<String> difficultyLevelComboBox = new JComboBox<String>();
     
-    JButton nwB=new JButton("New Game");
-    JButton unB=new JButton("Undo");
-    JButton hlpB=new JButton(hlp);
-    JButton snB=new JButton(snp);
-
-    ButtonGroup players = new ButtonGroup();
-    JRadioButton p1 = new JRadioButton("1-Player", true);
-    JRadioButton p2 = new JRadioButton("2-Player", false);
-
-    ButtonGroup colors = new ButtonGroup();
-    JRadioButton c1 = new JRadioButton("Red", false);
-    JRadioButton c2 = new JRadioButton("Yellow", true);
-
-    Help hp=new Help();
-
-    JLabel mode=new JLabel("Mode");
-    JLabel col=new JLabel("Colour");
-    JLabel diff=new JLabel("Difficulty Level");
-    JLabel rp=new JLabel();
-    JLabel rpt=new JLabel("Red Piece");
-    JLabel ypt=new JLabel("Yellow Piece");
-    JLabel yp=new JLabel();
-    JLabel rk=new JLabel();
-    JLabel rkt=new JLabel("Red King");
-    JLabel ykt=new JLabel("Yellow King");
-    JLabel yk=new JLabel();
-
-    JComboBox<String> level=new JComboBox<String>();
+    JLabel redPieceIcon = new JLabel();
+    JLabel redPieceText = new JLabel("Red Piece");
+    
+    JLabel yellowPieceIcon = new JLabel();
+    JLabel yellowPieceText = new JLabel("Yellow Piece");
+    
+    JLabel redKingPieceIcon = new JLabel();
+    JLabel redKingPieceText = new JLabel("Red King");
+    
+    JLabel yellowKingPieceIcon = new JLabel();
+    JLabel yellowKingPieceText = new JLabel("Yellow King");
 
     String selectedColor;
     int selectedMode;
@@ -106,116 +113,117 @@ public class Checkers
     {
         setLayout(null);
 
-        nwB.setFocusPainted(false);
-        unB.setFocusPainted(false);
-        c1.setFocusPainted(false);
-        c2.setFocusPainted(false);
-        p1.setFocusPainted(false);
-        p2.setFocusPainted(false);
-        hlpB.setFocusPainted(false);
-        snB.setFocusPainted(false);
+        newGameButton.setFocusPainted(false);
+        undoButton.setFocusPainted(false);
+        redRadioButton.setFocusPainted(false);
+        yellowRadioButton.setFocusPainted(false);
+        p1RadioButton.setFocusPainted(false);
+        p2RadioButton.setFocusPainted(false);
+        helpButton.setFocusPainted(false);
+        soundButton.setFocusPainted(false);
 
-        diff.setFont(new Font("SansSerif",Font.PLAIN,11));
-        col.setFont(new Font("SansSerif",Font.PLAIN,11));
-        mode.setFont(new Font("SansSerif",Font.PLAIN,11));
-        c1.setFont(new Font("SansSerif",Font.PLAIN,11));
-        c2.setFont(new Font("SansSerif",Font.PLAIN,11));
-        p1.setFont(new Font("SansSerif",Font.PLAIN,11));
-        p2.setFont(new Font("SansSerif",Font.PLAIN,11));
-        nwB.setFont(new Font("SansSerif",Font.BOLD,11));
-        unB.setFont(new Font("SansSerif",Font.BOLD,11));
-        hlpB.setFont(new Font("SansSerif",Font.PLAIN,11));
-        snB.setFont(new Font("SansSerif",Font.PLAIN,11));
-        msg.setFont(new Font("SansSerif",Font.PLAIN,11)); 
+        difficultyLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
+        colorLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
+        modeLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
+        redRadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        yellowRadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        p1RadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        p2RadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        newGameButton.setFont(new Font("SansSerif",Font.BOLD,11));
+        undoButton.setFont(new Font("SansSerif",Font.BOLD,11));
+        helpButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        soundButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        messageBar.setFont(new Font("SansSerif",Font.PLAIN,11)); 
 
-        nwB.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        unB.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        hlpB.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        snB.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        nwB.addActionListener(this);
-        unB.addActionListener(this);
-        hlpB.addActionListener(this);
-        snB.addActionListener(this);
-        nwB.setBounds(405,70,95,25);//297
-        this.add(nwB);
-        unB.setBounds(405,100,95,25);
-        this.add(unB);
-        hlpB.setBounds(415,10,25,25);
-        this.add(hlpB);
-        snB.setBounds(460,10,25,25);
-        this.add(snB);
+        newGameButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        undoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        soundButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        newGameButton.addActionListener(this);
+        undoButton.addActionListener(this);
+        helpButton.addActionListener(this);
+        soundButton.addActionListener(this);
+        newGameButton.setBounds(405,70,95,25);//297
+        this.add(newGameButton);
+        undoButton.setBounds(405,100,95,25);
+        this.add(undoButton);
+        helpButton.setBounds(415,10,25,25);
+        this.add(helpButton);
+        soundButton.setBounds(460,10,25,25);
+        this.add(soundButton);
 
-        mode.setBounds(420,260,80,25);
-        this.add(mode);
-        p1.addActionListener(this);
-        p2.addActionListener(this);
-        p1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        p2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        players.add(p1);
-        players.add(p2);
-        p1.setBounds(415,290,80,25);
-        p2.setBounds(415,318,80,25);
-        this.add(p1);
-        this.add(p2);
+        modeLabel.setBounds(420,260,80,25);
+        this.add(modeLabel);
+        p1RadioButton.addActionListener(this);
+        p2RadioButton.addActionListener(this);
+        p1RadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        p2RadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        playerButtons.add(p1RadioButton);
+        playerButtons.add(p2RadioButton);
+        p1RadioButton.setBounds(415,290,80,25);
+        p2RadioButton.setBounds(415,318,80,25);
+        this.add(p1RadioButton);
+        this.add(p2RadioButton);
 
-        col.setBounds(420,350,80,25);
-        this.add(col);
-        c1.addActionListener(this);
-        c2.addActionListener(this);
-        c1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        c2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        colors.add(c1);
-        colors.add(c2);
-        c1.setBounds(415,380,80,25);
-        c2.setBounds(415,408,80,25);
-        this.add(c1);
-        this.add(c2);
+        colorLabel.setBounds(420,350,80,25);
+        this.add(colorLabel);
+        redRadioButton.addActionListener(this);
+        yellowRadioButton.addActionListener(this);
+        redRadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        yellowRadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        colorButtons.add(redRadioButton);
+        colorButtons.add(yellowRadioButton);
+        redRadioButton.setBounds(415,380,80,25);
+        yellowRadioButton.setBounds(415,408,80,25);
+        this.add(redRadioButton);
+        this.add(yellowRadioButton);
 
-        level.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        level.addItemListener(this);
-        level.addItem("Easy");
-        level.addItem("Fairly Easy");
-        level.addItem("Moderate");
-        level.addItem("Bit Difficult");
-        level.addItem("Tough");
-        level.setSelectedIndex(2);
-        level.setBounds(415,200,80,25);
-        this.add(level);
+        //Initializes the ComboBox with various difficulty levels.
+        difficultyLevelComboBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        difficultyLevelComboBox.addItemListener(this);
+        difficultyLevelComboBox.addItem("Easy");
+        difficultyLevelComboBox.addItem("Medium");
+        difficultyLevelComboBox.addItem("Hard");
+        difficultyLevelComboBox.addItem("Advanced");
+        difficultyLevelComboBox.addItem("Expert");
+        difficultyLevelComboBox.setSelectedIndex(2);
+        difficultyLevelComboBox.setBounds(415,200,80,25);
+        this.add(difficultyLevelComboBox);
 
-        diff.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        diff.setBounds(415,170,100,25);
-        this.add(diff);
+        difficultyLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        difficultyLabel.setBounds(415,170,100,25);
+        this.add(difficultyLabel);
 
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
 
-        msg.setBounds(0,405,400,20);
-        msg.setEnabled(false);
-        this.add(msg);
+        messageBar.setBounds(0,405,400,20);
+        messageBar.setEnabled(false);
+        this.add(messageBar);
 
-        rp.setBounds(10, 425, 50, 50);
-        rp.setIcon(redN);
-        this.add(rp);
-        rpt.setBounds(2, 468, 60, 20);
-        this.add(rpt);
+        redPieceIcon.setBounds(10, 425, 50, 50);
+        redPieceIcon.setIcon(redNormalIcon);
+        this.add(redPieceIcon);
+        redPieceText.setBounds(2, 468, 60, 20);
+        this.add(redPieceText);
 
-        yp.setBounds(122, 425, 50, 50);
-        yp.setIcon(yellowN);
-        this.add(yp);
-        ypt.setBounds(108, 468, 98, 20);
-        this.add(ypt);
+        yellowPieceIcon.setBounds(122, 425, 50, 50);
+        yellowPieceIcon.setIcon(yellowNormalIcon);
+        this.add(yellowPieceIcon);
+        yellowPieceText.setBounds(108, 468, 98, 20);
+        this.add(yellowPieceText);
 
-        rk.setBounds(234, 425, 50, 50);
-        rk.setIcon(redK);
-        this.add(rk);
-        rkt.setBounds(230, 468, 60, 20);
-        this.add(rkt);
+        redKingPieceIcon.setBounds(234, 425, 50, 50);
+        redKingPieceIcon.setIcon(redKingIcon);
+        this.add(redKingPieceIcon);
+        redKingPieceText.setBounds(230, 468, 60, 20);
+        this.add(redKingPieceText);
 
-        yk.setBounds(346, 425, 50, 50);
-        yk.setIcon(yellowK);
-        this.add(yk);
-        ykt.setBounds(334, 468, 100, 20);
-        this.add(ykt);
+        yellowKingPieceIcon.setBounds(346, 425, 50, 50);
+        yellowKingPieceIcon.setIcon(yellowKingIcon);
+        this.add(yellowKingPieceIcon);
+        yellowKingPieceText.setBounds(334, 468, 100, 20);
+        this.add(yellowKingPieceText);
         
         //g=getGraphics();
         //g.drawImage(redN.getImage(),30,450,this);
@@ -251,31 +259,31 @@ public class Checkers
         if(e.getActionCommand().equalsIgnoreCase("1-Player"))
         {
             new PlaySound("src/sounds/option.wav").start();
-            col.setEnabled(true);
-            col.setVisible(true);
-            diff.setEnabled(true);
-            diff.setVisible(true);
-            c1.setEnabled(true);
-            c1.setVisible(true);
-            c2.setEnabled(true);
-            c2.setVisible(true);
-            level.setEnabled(true);
-            level.setVisible(true);
+            colorLabel.setEnabled(true);
+            colorLabel.setVisible(true);
+            difficultyLabel.setEnabled(true);
+            difficultyLabel.setVisible(true);
+            redRadioButton.setEnabled(true);
+            redRadioButton.setVisible(true);
+            yellowRadioButton.setEnabled(true);
+            yellowRadioButton.setVisible(true);
+            difficultyLevelComboBox.setEnabled(true);
+            difficultyLevelComboBox.setVisible(true);
         }
         if(e.getActionCommand().equalsIgnoreCase("2-Player"))
         {
             new PlaySound("src/sounds/option.wav").start();
-            col.setEnabled(false);
-            col.setVisible(false);
-            diff.setEnabled(false);
-            diff.setVisible(false);
-            c1.setEnabled(false);
-            c1.setVisible(false);
-            c2.setEnabled(false);
-            c2.setVisible(false);
-            level.setEnabled(false);
-            level.setVisible(false);
-            c2.setSelected(true);
+            colorLabel.setEnabled(false);
+            colorLabel.setVisible(false);
+            difficultyLabel.setEnabled(false);
+            difficultyLabel.setVisible(false);
+            redRadioButton.setEnabled(false);
+            redRadioButton.setVisible(false);
+            yellowRadioButton.setEnabled(false);
+            yellowRadioButton.setVisible(false);
+            difficultyLevelComboBox.setEnabled(false);
+            difficultyLevelComboBox.setVisible(false);
+            yellowRadioButton.setSelected(true);
         }
         if(e.getActionCommand().equalsIgnoreCase("red"))
         {
@@ -295,22 +303,22 @@ public class Checkers
             new PlaySound("src/sounds/button.wav").start();
             undo();
         }
-        if(e.getSource()==hlpB)
+        if(e.getSource()==helpButton)
         {
             new PlaySound("src/sounds/button.wav").start();
-            hp.setVisible(true);
+            helpMenu.setVisible(true);
         }
-        if(e.getSource()==snB)
+        if(e.getSource()==soundButton)
         {
             if(silent)
             {
-                snB.setIcon(snp);
+                soundButton.setIcon(soundButtonIcon);
                 silent=false;
                 new PlaySound("src/sounds/button.wav").start();
             }
             else
             {
-                snB.setIcon(mup);
+                soundButton.setIcon(muteButtonIcon);
                 silent=true;
             }
         }
@@ -325,11 +333,11 @@ public class Checkers
         //If someone wants to move secondly, red has to be selected
         //Yellow is always at the bottom of the board
 
-        selectedColor= c1.isSelected() ? "red" : "yellow";
-        selectedMode=p1.isSelected()?1:2;
-        difficulty=level.getSelectedIndex();
+        selectedColor = redRadioButton.isSelected() ? "red" : "yellow";
+        selectedMode = p1RadioButton.isSelected() ? 1 : 2;
+        difficulty = difficultyLevelComboBox.getSelectedIndex();
 
-        unB.setEnabled(false);
+        undoButton.setEnabled(false);
 
         won=0;
 
@@ -390,13 +398,13 @@ public class Checkers
             for(int j=0;j<8;j++)
             {
                 if(board[i][j]==REDNORMAL)
-                    g.drawImage(redN.getImage(),i*50,j*50,this);
+                    g.drawImage(redNormalIcon.getImage(),i*50,j*50,this);
                 else if(board[i][j]==YELLOWNORMAL)
-                    g.drawImage(yellowN.getImage(),i*50,j*50,this);
+                    g.drawImage(yellowNormalIcon.getImage(),i*50,j*50,this);
                 else if(board[i][j]==REDKING)
-                    g.drawImage(redK.getImage(),i*50,j*50,this);
+                    g.drawImage(redKingIcon.getImage(),i*50,j*50,this);
                 else if(board[i][j]==YELLOWKING)
-                    g.drawImage(yellowK.getImage(),i*50,j*50,this);
+                    g.drawImage(yellowKingIcon.getImage(),i*50,j*50,this);
             }
         }
     }
@@ -426,9 +434,9 @@ public class Checkers
         if(undoCount>3)
         {
             if(selectedMode==1 && difficulty!=4)
-                unB.setEnabled(true);
+                undoButton.setEnabled(true);
             else if(selectedMode==2)
-                unB.setEnabled(true);
+                undoButton.setEnabled(true);
         }
         
         for(int i=0;i<8;i++)
@@ -602,16 +610,16 @@ public class Checkers
     {       //prints msgs to the statuss bar
         if (this.toMove == REDNORMAL)
         {
-            msg.setText("Red to move");
+            messageBar.setText("Red to move");
         }
         else
         {
-            msg.setText("Yellow to move");
+            messageBar.setText("Yellow to move");
         }
 
         if (loser == REDNORMAL && won==0)
         {
-            msg.setText("Yellow Wins!");
+            messageBar.setText("Yellow Wins!");
             try 
             {
                 Thread.sleep(150);
@@ -627,7 +635,7 @@ public class Checkers
         }
         else if (loser == YELLOWNORMAL && won==0)
         {
-            msg.setText("Red Wins!");
+            messageBar.setText("Red Wins!");
             try 
             {
                 Thread.sleep(150);
