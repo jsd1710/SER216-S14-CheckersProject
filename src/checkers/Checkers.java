@@ -315,10 +315,15 @@ public class Checkers
         }
         if(e.getActionCommand().equalsIgnoreCase("Undo Previous Game") && undoCount > 3 && difficulty != 4)
         {
+        	if (winner != null)
+        	{
+        		winner.dispose();
+        	}
         	won = 0;
         	loser = EMPTY;
+        	new PlaySound("src/sounds/button.wav").start();
         	undo();
-        	winner.dispose();
+        	
         }
         if(e.getActionCommand().equalsIgnoreCase("Undo") && undoCount>3)
         {
