@@ -323,7 +323,7 @@ public class Checkers
         	loser = EMPTY;
         	new PlaySound("src/sounds/button.wav").start();
         	undo();
-        	
+
         }
         if(e.getActionCommand().equalsIgnoreCase("Undo") && undoCount>3)
         {
