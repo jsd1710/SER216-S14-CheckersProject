@@ -114,72 +114,82 @@ public class Checkers
     {
         setLayout(null);
 
+        //Initializes the newGameButton into memory.---------------------------
         newGameButton.setFocusPainted(false);
-        undoButton.setFocusPainted(false);
-        redRadioButton.setFocusPainted(false);
-        yellowRadioButton.setFocusPainted(false);
-        p1RadioButton.setFocusPainted(false);
-        p2RadioButton.setFocusPainted(false);
-        helpButton.setFocusPainted(false);
-        soundButton.setFocusPainted(false);
-
-        difficultyLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
-        colorLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
-        modeLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
-        redRadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
-        yellowRadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
-        p1RadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
-        p2RadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
         newGameButton.setFont(new Font("SansSerif",Font.BOLD,11));
-        undoButton.setFont(new Font("SansSerif",Font.BOLD,11));
-        helpButton.setFont(new Font("SansSerif",Font.PLAIN,11));
-        soundButton.setFont(new Font("SansSerif",Font.PLAIN,11));
-        messageBar.setFont(new Font("SansSerif",Font.PLAIN,11)); 
-
         newGameButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        undoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        soundButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         newGameButton.addActionListener(this);
+        newGameButton.setBounds(405,70,95,25);
+        
+        //Initializes the undoButton into memory.------------------------------
+        undoButton.setFocusPainted(false);
+        undoButton.setFont(new Font("SansSerif",Font.BOLD,11));
+        undoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         undoButton.addActionListener(this);
-        helpButton.addActionListener(this);
-        soundButton.addActionListener(this);
-        newGameButton.setBounds(405,70,95,25);//297
-        this.add(newGameButton);
         undoButton.setBounds(405,100,95,25);
-        this.add(undoButton);
-        helpButton.setBounds(415,10,25,25);
-        this.add(helpButton);
-        soundButton.setBounds(460,10,25,25);
-        this.add(soundButton);
-
-        modeLabel.setBounds(420,260,80,25);
-        this.add(modeLabel);
-        p1RadioButton.addActionListener(this);
-        p2RadioButton.addActionListener(this);
-        p1RadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        p2RadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        playerButtons.add(p1RadioButton);
-        playerButtons.add(p2RadioButton);
-        p1RadioButton.setBounds(415,290,80,25);
-        p2RadioButton.setBounds(415,318,80,25);
-        this.add(p1RadioButton);
-        this.add(p2RadioButton);
-
+        
+        //Initializes the 'choose color' section into memory.------------------
+        //Label
+        colorLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
         colorLabel.setBounds(420,350,80,25);
-        this.add(colorLabel);
+        //Red button
+        redRadioButton.setFocusPainted(false);
+        redRadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
         redRadioButton.addActionListener(this);
-        yellowRadioButton.addActionListener(this);
         redRadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        //Yellow button
+        yellowRadioButton.setFocusPainted(false);
+        yellowRadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        yellowRadioButton.addActionListener(this);
         yellowRadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        //Color buttons group
         colorButtons.add(redRadioButton);
         colorButtons.add(yellowRadioButton);
+        //Positioning
         redRadioButton.setBounds(415,380,80,25);
         yellowRadioButton.setBounds(415,408,80,25);
-        this.add(redRadioButton);
-        this.add(yellowRadioButton);
-
-        //Initializes the ComboBox with various difficulty levels.
+        
+        //Initializes the 'chose mode' section into memory.--------------------
+        //Label
+        modeLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
+        modeLabel.setBounds(420,260,80,25);
+        //Player 1 button
+        p1RadioButton.setFocusPainted(false);
+        p1RadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        p1RadioButton.addActionListener(this);
+        p1RadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        //Player 2 button
+        p2RadioButton.setFocusPainted(false);
+        p2RadioButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        p2RadioButton.addActionListener(this);
+        p2RadioButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        //Player buttons group
+        playerButtons.add(p1RadioButton);
+        playerButtons.add(p2RadioButton);
+        //Positioning
+        p1RadioButton.setBounds(415,290,80,25);
+        p2RadioButton.setBounds(415,318,80,25);
+        
+        //Initializes the help button into memory.-----------------------------
+        helpButton.setFocusPainted(false);
+        helpButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        helpButton.addActionListener(this);
+        helpButton.setBounds(415,10,25,25);
+        
+        //Initializes the sound button into memory.----------------------------
+        soundButton.setFocusPainted(false);
+        soundButton.setFont(new Font("SansSerif",Font.PLAIN,11));
+        soundButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        soundButton.addActionListener(this);
+        soundButton.setBounds(460,10,25,25);
+        
+        //Initializes the ComboBox with various difficulty levels.-------------
+        //Label
+        difficultyLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
+        difficultyLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        difficultyLabel.setBounds(415,170,100,25);
+        //ComboBox
         difficultyLevelComboBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
         difficultyLevelComboBox.addItemListener(this);
         difficultyLevelComboBox.addItem("Easy");
@@ -189,45 +199,76 @@ public class Checkers
         difficultyLevelComboBox.addItem("Expert");
         difficultyLevelComboBox.setSelectedIndex(2);
         difficultyLevelComboBox.setBounds(415,200,80,25);
-        this.add(difficultyLevelComboBox);
-
-        difficultyLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        difficultyLabel.setBounds(415,170,100,25);
-        this.add(difficultyLabel);
-
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
-
+        
+        //Initializes the message bar into memory.-----------------------------
+        messageBar.setFont(new Font("SansSerif",Font.PLAIN,11));
         messageBar.setBounds(0,405,400,20);
         messageBar.setEnabled(false);
-        this.add(messageBar);
-
+        
+        //Initializes the 'red piece' image into memory.-----------------------
+        //Icon
         redPieceIcon.setBounds(10, 425, 50, 50);
         redPieceIcon.setIcon(redNormalIcon);
-        this.add(redPieceIcon);
+        //Text
         redPieceText.setBounds(2, 468, 60, 20);
-        this.add(redPieceText);
-
+        
+        //Initializes the 'yellow piece' image into memory.--------------------
+        //Icon
         yellowPieceIcon.setBounds(122, 425, 50, 50);
         yellowPieceIcon.setIcon(yellowNormalIcon);
-        this.add(yellowPieceIcon);
+        //Text
         yellowPieceText.setBounds(108, 468, 98, 20);
-        this.add(yellowPieceText);
-
+        
+        //Initializes the 'red king piece' image into memory.------------------
+        //Icon
         redKingPieceIcon.setBounds(234, 425, 50, 50);
         redKingPieceIcon.setIcon(redKingIcon);
-        this.add(redKingPieceIcon);
+        //Text
         redKingPieceText.setBounds(230, 468, 60, 20);
-        this.add(redKingPieceText);
-
+        
+        //Initializes the 'yellow king piece' image into memory.---------------
+        //Icon
         yellowKingPieceIcon.setBounds(346, 425, 50, 50);
         yellowKingPieceIcon.setIcon(yellowKingIcon);
-        this.add(yellowKingPieceIcon);
+        //Text
         yellowKingPieceText.setBounds(334, 468, 100, 20);
+        
+        //Commits the initializes objects to THIS JPanel.----------------------
+        this.add(messageBar);
+        //Options buttons
+        this.add(newGameButton);        
+        this.add(undoButton);        
+        this.add(helpButton);
+        this.add(soundButton);
+        //Mode select
+        this.add(modeLabel);        
+        this.add(p1RadioButton);
+        this.add(p2RadioButton);
+        //Color select
+        this.add(colorLabel);
+        this.add(redRadioButton);
+        this.add(yellowRadioButton);
+        //Difficulty select
+        this.add(difficultyLabel);
+        this.add(difficultyLevelComboBox);
+        //Red piece image
+        this.add(redPieceIcon);
+        this.add(redPieceText);
+        //Yellow piece image
+        this.add(yellowPieceIcon);
+        this.add(yellowPieceText);
+        //Red king image
+        this.add(redKingPieceIcon);
+        this.add(redKingPieceText);
+        //Yellow king image
+        this.add(yellowKingPieceIcon);
         this.add(yellowKingPieceText);
         
+        //Tells this JPanel to listen to mouse input.--------------------------
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+        
         //g=getGraphics();
-        //g.drawImage(redN.getImage(),30,450,this);
 
     }
 
