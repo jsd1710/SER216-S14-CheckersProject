@@ -269,7 +269,6 @@ public class Checkers
         this.addMouseMotionListener(this);
         
         //g=getGraphics();
-
     }
 
     public void paintComponent(Graphics g)	

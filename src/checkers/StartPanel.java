@@ -21,17 +21,20 @@ public class StartPanel extends JPanel
     @Override
     public void paintComponent(Graphics g)
 	{
-	super.paintComponent(g);
-        g.drawLine(0,400,508,400);
-        ///////////////////////////////////////////////////////////////////////
+    	super.paintComponent(g);
+        g.drawLine(0,400,508,400); //Bottom line
+        
+        //Draws a red, Times New Roman string at 180, 100.
         g.setColor(Color.RED);
         g.setFont(new Font("Times new roman",Font.BOLD,30));
         g.drawString("CHECKERS",180,100);
-        /////////////////////////////////////////////////////////////////////////
+        
+        //Draws a blue Times New Roman string at 160, 130.
         g.setColor(Color.BLUE);
         g.setFont(new Font("Times new roman",Font.BOLD,14));
         g.drawString("CS 3230 INTELLIGENT SYSTEMS",160,130);
-        //////////////////////////////////////////////////////////////////////
+        
+        //Draws multiple black string.
         g.setFont(new Font("Times new roman",Font.BOLD,12));
         g.setColor(Color.BLACK);
         g.drawString("A.M.H.H. ABEYKOON",180,180);
@@ -42,7 +45,8 @@ public class StartPanel extends JPanel
         g.drawString("070125B",320,220);
         g.drawString("K.C.B. GAJASINGHE",180,240);
         g.drawString("070137M",320,240);
-        ////////////////////////////////////////////////////////////////////////
+        
+        //Draws CheckersIcon.jpg at 350, 280.
         g.drawImage(new ImageIcon(getClass().getResource("/images/checkersIcon.jpg")).getImage(),350,280,this);//checkersIcon.jpg
 
 
@@ -65,6 +69,7 @@ public class StartPanel extends JPanel
             //g.fillPolygon(new int[]{80 * i, 40+80*i, 80 * i, -40+80*i},new int[]{280+80*i, 320+80*i,360+80*i, 320+80*i},4);
             //g.fillPolygon(new int[]{80 * i, 40+80*i, 80 * i, -40+80*i},new int[]{360+80*i, 400+80*i,420+80*i, 400+80*i},4);
         }
+        //Draws vertical line bordering the checkers board.
         g.drawLine(150, 0, 150, 400);
     }
 }

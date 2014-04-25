@@ -9,10 +9,10 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class CheckerFrame extends JFrame implements ActionListener
 {
-	//Start button located on the bottom center of "this" CheckerFrame.
-    JButton stB=new JButton("Start Game"); 
-    //Creates a panel that isn't used until the JButton stB is pressed.
-    JPanel gmP=new StartPanel(); 
+    //Creates a panel that is initially populated with StartPanel, but later populated with Checkers.
+    JPanel gamePanel = new StartPanel(); 
+    //Start button located on the bottom center of "this" CheckerFrame.
+    JButton startButton = new JButton("Start Game"); 
   
     /**
      * When a new CheckerFrame is made, it tries to set 
@@ -28,8 +28,9 @@ public class CheckerFrame extends JFrame implements ActionListener
         }
         catch (Exception e) 
         {
-           //no need to handle exception as it only affect the appearence
+           //no need to handle exception as it only affects the appearance.
         }
+        
         setupGUI();
         //Plays sound when JFrame and its components are done being drawn.
         new PlaySound("src/sounds/Start.wav").start(); 
@@ -40,41 +41,36 @@ public class CheckerFrame extends JFrame implements ActionListener
      */
     private void setupGUI() 
     {    	
-        setLayout(null);
+        this.setLayout(null);
         
-        gmP.setBounds(0,0,508,401);//400,401
-        //gmP.imageUpdate(ne, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH)
-        add(gmP);
-        
-        //Sets the alignment of text in the JButton stB.
-        stB.setHorizontalAlignment(SwingConstants.LEADING); 
-        stB.setIcon(new ImageIcon(getClass().getResource("/images/checkersIcon.jpg")));
-        stB.setBackground(Color.LIGHT_GRAY);
-        //Converts the cursor from pointer to finger when moused over.
-        stB.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
-        stB.setBounds(154,420,260,60); //Coordinates and size.
-        stB.setFont(new Font("Times new roman",Font.BOLD,20));
-        stB.addActionListener(this);
-        /*
-         * Prevents a focus box to be drawn over the 
-         * JButton stB when the program is the focused window.
-         */
-        stB.setFocusPainted(false);
-        add(stB); //Adds the JButton stB to CheckerFrame.
-
-        //Sets "this" CheckerFrame's titlebar image.
+        //Initializes this CheckerFrame into memory.---------------------------
         this.setIconImage(new ImageIcon(getClass().getResource("/images/icon.jpg")).getImage()); 
-
-        setSize(508,520); //Sets "this" CheckerFrame's window size.
-        //Sets "this" CheckerFrame's position on the screen.
-        setLocation(
+        
+        this.setResizable(false);
+        this.setTitle("Play Checkers");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(508,520);
+        this.setLocation(
         			(int)getToolkit().getScreenSize().getWidth()/2-254,
         			(int)getToolkit().getScreenSize().getHeight()/2-310
     				); 
-        setResizable(false);
-        setVisible(true);
-        setTitle("Play Checkers");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+        
+        gamePanel.setBounds(0,0,508,520);//400,401
+        
+        //Initializes the start button into memory.----------------------------
+        startButton.setHorizontalAlignment(SwingConstants.LEADING); 
+        startButton.setIcon(new ImageIcon(getClass().getResource("/images/checkersIcon.jpg")));
+        startButton.setBackground(Color.LIGHT_GRAY);
+        startButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+        startButton.setBounds(154, 415, 236, 60);
+        startButton.setFont(new Font("Times new roman",Font.BOLD,20));
+        startButton.addActionListener(this);
+        startButton.setFocusPainted(false);
+        
+        gamePanel.add(startButton);
+        
+        this.add(gamePanel);
     }
 
     /**
@@ -85,20 +81,23 @@ public class CheckerFrame extends JFrame implements ActionListener
      */
     public void actionPerformed(ActionEvent e) 
     {
-        if(e.getActionCommand().equalsIgnoreCase("Start Game")) //If the JButton stB is clicked:
+        if(e.getActionCommand().equalsIgnoreCase("Start Game")) //If the startButton is clicked:
         {
         	/*
         	 * This for some reason un-draws the Start Button 
         	 * initially drawn and activates the New Game key?
         	 */
-            ((JButton)e.getSource()).setText(null); 
-            
+        	
+
             new PlaySound("src/sounds/button.wav").start(); //Plays the sound signifying a new game.
+
+            gamePanel = new Checkers(); //Prepares the JPanel gamePanel with content.
+            setupGUI();
             
-            gmP = new Checkers(); //Prepares the JPanel gmP with content.
-            gmP.setBounds(0,0,508,401); //Sets coordinates and size.
             
-            this.setContentPane(gmP); //Adds the JPanel gmP to "this" CheckerFrame.
+            gamePanel.remove(startButton);
+            this.setContentPane(gamePanel); //Adds the JPanel gmP to "this" CheckerFrame.
+            
         }
     }
 }
