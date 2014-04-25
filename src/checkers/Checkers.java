@@ -595,7 +595,10 @@ public class Checkers
     {         
     	if (e.getStateChange() != difficulty && difficulty != 0)
     	{
-    		messageBar.setText("Click 'New Game' to apply settings.");
+    		this.remove(messageBar);
+    		messageBar.setText("Click 'New Game' to apply settings.");messageBar.setFont(new Font("SansSerif",Font.PLAIN,11));
+    		this.add(messageBar);
+    		update(getGraphics());
     	}
     }
 
@@ -725,6 +728,7 @@ public class Checkers
             
             winner.add(newGameWinButton);
             winner.add(undoPreviousGameButton);
+            update(getGraphics());
             won=1;
             //undoCount=0;
             //newGame();
@@ -760,6 +764,7 @@ public class Checkers
             
             winner.add(newGameWinButton);
             winner.add(undoPreviousGameButton);
+            update(getGraphics());
             won=1;
             //undoCount=0;
             //newGame();            
