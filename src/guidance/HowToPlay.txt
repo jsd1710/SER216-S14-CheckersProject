@@ -1,1 +1,27 @@
-Don't be dumb.
+Setup:
+The board is already setup per checker regulations.
+Regular pieces are yellow or red.
+King pieces will be noted by having a star on them.
+
+Turns:
+Players will take turns moving pieces.
+
+Moving:
+Moves are allowed only on the dark squares, so pieces always move diagonally. 
+Regular pieces are always limited to forward moves (toward the opponent).
+King pieces must still move diagonally, but they may move forwards or backwards.
+A piece making a non-capturing move (not involving a jump) may move only one square.
+
+Capturing:
+A piece making a capturing move (a jump) leaps over one of the opponent's pieces, landing in a straight diagonal line on the other side. 
+Only one piece may be captured in a single jump; however, multiple jumps are allowed on a single turn.
+When a piece is captured, it is removed from the board.
+If you can capture a piece legally, then you must capture that piece; 
+If there are multiple pieces you can capture, you may choose which one to capture.
+
+King:
+When a piece reaches the farthest row from the player who controls that piece, it becomes a king. 
+
+Winning:
+A player wins when their opponent cannot make any moves.
+This can be done by either capturing all opponents pieces, or blocking all opponents pieces from making legal moves.

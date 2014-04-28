@@ -482,7 +482,7 @@ public class CheckerMove
         int endy = move[3];
         while (endx>0 || endy>0)
         {
-
+            
             ApplyMove(board,startx,starty,endx%10,endy%10);
             startx = endx%10;
             starty = endy%10;

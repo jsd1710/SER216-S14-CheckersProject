@@ -48,7 +48,7 @@ public class Checkers
 
     //ComboBox for selecting the different difficulty levels.
     JLabel difficultyLabel = new JLabel("Difficulty Level");
-    JComboBox<String> difficultyLevelComboBox = new JComboBox<String>();
+    JComboBox difficultyLevelComboBox = new JComboBox();
     
     JLabel redPieceIcon = new JLabel();
     JLabel redPieceText = new JLabel("Red Piece");
@@ -537,8 +537,7 @@ public class Checkers
 				loser = REDNORMAL;
 			else
 			{
-                CheckerMove.moveComputer(board, result);
-
+                CheckerMove.moveComputer(board, result);                
                 if (loser == EMPTY)
                 {
                     new PlaySound("src/sounds/comPlay.wav").start();
@@ -558,7 +557,7 @@ public class Checkers
 				loser = YELLOWNORMAL;
 			else
 			{
-                CheckerMove.moveComputer(board, result);
+                CheckerMove.moveComputer(board, result);                
                 if (loser == EMPTY)
                 {
                 	new PlaySound("src/sounds/comPlay.wav").start();
