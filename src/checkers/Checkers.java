@@ -707,7 +707,7 @@ public class Checkers
             {
                 e.printStackTrace();
             }
-            winner = new GameWin("Red",this.getLocationOnScreen());
+            winner = new GameWin("Yellow",this.getLocationOnScreen());
             
             JButton newGameWinButton = new JButton("New Game");
             newGameWinButton.setActionCommand("Start New Game");
