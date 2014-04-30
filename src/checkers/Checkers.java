@@ -50,18 +50,39 @@ public class Checkers
     JLabel difficultyLabel = new JLabel("Difficulty Level");
     JComboBox difficultyLevelComboBox = new JComboBox();
     
+    //Images for representing the piece key.
+    //Red piece
     JLabel redPieceIcon = new JLabel();
     JLabel redPieceText = new JLabel("Red Piece");
-    
+    //Yellow piece
     JLabel yellowPieceIcon = new JLabel();
     JLabel yellowPieceText = new JLabel("Yellow Piece");
-    
+    //Red king
     JLabel redKingPieceIcon = new JLabel();
     JLabel redKingPieceText = new JLabel("Red King");
-    
+    //Yellow king
     JLabel yellowKingPieceIcon = new JLabel();
     JLabel yellowKingPieceText = new JLabel("Yellow King");
 
+    //Labels for displaying game stats.
+    JLabel 	gameStats = new JLabel("Game Statistics");
+    
+    JLabel 	redPlayer = new JLabel("Red Player - ");
+    JLabel 	redCapturedLabel = new JLabel("Captured:");
+    JLabel 	redCaptured = new JLabel("0");
+    int 	redCapturedCount = 0;
+    JLabel 	redAliveLabel = new JLabel("Alive:");
+    JLabel 	redAlive = new JLabel("0");
+    int		redAliveCount = 0;
+    
+    JLabel 	yellowPlayer = new JLabel("Yellow Player - ");
+    JLabel 	yellowCapturedLabel = new JLabel("Captured:");
+    JLabel 	yellowCaptured = new JLabel("0");
+    int 	yellowCapturedCount = 0;
+    JLabel 	yellowAliveLabel = new JLabel("Alive:");
+    JLabel 	yellowAlive = new JLabel("0");
+    int		yellowAliveCount = 0;
+    
     String selectedColor;
     int selectedMode;
     int difficulty;
@@ -119,14 +140,14 @@ public class Checkers
         newGameButton.setFont(new Font("SansSerif",Font.BOLD,11));
         newGameButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         newGameButton.addActionListener(this);
-        newGameButton.setBounds(405,70,95,25);
+        newGameButton.setBounds(405,130,95,25);
         
         //Initializes the undoButton into memory.------------------------------
         undoButton.setFocusPainted(false);
         undoButton.setFont(new Font("SansSerif",Font.BOLD,11));
         undoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         undoButton.addActionListener(this);
-        undoButton.setBounds(405,100,95,25);
+        undoButton.setBounds(405,160,95,25);
         
         //Initializes the 'choose color' section into memory.------------------
         //Label
@@ -175,20 +196,20 @@ public class Checkers
         helpButton.setFont(new Font("SansSerif",Font.PLAIN,11));
         helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         helpButton.addActionListener(this);
-        helpButton.setBounds(415,10,25,25);
+        helpButton.setBounds(415,450,25,25);
         
         //Initializes the sound button into memory.----------------------------
         soundButton.setFocusPainted(false);
         soundButton.setFont(new Font("SansSerif",Font.PLAIN,11));
         soundButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         soundButton.addActionListener(this);
-        soundButton.setBounds(460,10,25,25);
+        soundButton.setBounds(460,450,25,25);
         
         //Initializes the ComboBox with various difficulty levels.-------------
         //Label
         difficultyLabel.setFont(new Font("SansSerif",Font.PLAIN,11));
         difficultyLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        difficultyLabel.setBounds(415,170,100,25);
+        difficultyLabel.setBounds(415,200,100,25);
         //ComboBox
         difficultyLevelComboBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
         difficultyLevelComboBox.addItemListener(this);
@@ -198,7 +219,7 @@ public class Checkers
         difficultyLevelComboBox.addItem("Advanced");
         difficultyLevelComboBox.addItem("Expert");
         difficultyLevelComboBox.setSelectedIndex(2);
-        difficultyLevelComboBox.setBounds(415,200,80,25);
+        difficultyLevelComboBox.setBounds(415,230,80,25);
         
         //Initializes the message bar into memory.-----------------------------
         messageBar.setFont(new Font("SansSerif",Font.PLAIN,11));
@@ -233,6 +254,41 @@ public class Checkers
         //Text
         yellowKingPieceText.setBounds(334, 468, 100, 20);
         
+        //Initializes the Game Statistics section into memory------------------
+        //Game Statistics Label
+        gameStats.setFont(new Font("SansSerif",Font.BOLD,11));
+        gameStats.setBounds(407,0,90,15);
+        //Red Player Label
+        redPlayer.setFont(new Font("SansSerif",Font.PLAIN,11));
+        redPlayer.setBounds(403,15,80,15);
+        //Red Player Captured
+        redCapturedLabel.setFont(new Font("SansSerif",Font.PLAIN,10));
+        redCapturedLabel.setBounds(403,25,80,15);
+        redCaptured.setText(String.valueOf(redCapturedCount));
+        redCaptured.setFont(new Font("SansSerif",Font.PLAIN,10));
+        redCaptured.setBounds(450,25,80,15);
+        //Red Player Alive
+        redAliveLabel.setFont(new Font("SansSerif",Font.PLAIN,10));
+        redAliveLabel.setBounds(403,35,80,15);
+        redAlive.setText(String.valueOf(redAliveCount));
+        redAlive.setFont(new Font("SansSerif",Font.PLAIN,10));
+        redAlive.setBounds(431,35,80,15);
+        //Yellow Player Label
+        yellowPlayer.setFont(new Font("SansSerif",Font.PLAIN,11));
+        yellowPlayer.setBounds(403,70,80,15);
+        //Yellow Player Captured
+        yellowCapturedLabel.setFont(new Font("SansSerif",Font.PLAIN,10));
+        yellowCapturedLabel.setBounds(403,80,80,15);
+        yellowCaptured.setText(String.valueOf(redCapturedCount));
+        yellowCaptured.setFont(new Font("SansSerif",Font.PLAIN,10));
+        yellowCaptured.setBounds(450,80,80,15);
+        //Yellow Player Alive
+        yellowAliveLabel.setFont(new Font("SansSerif",Font.PLAIN,10));
+        yellowAliveLabel.setBounds(403,90,80,15);
+        yellowAlive.setText(String.valueOf(redAliveCount));
+        yellowAlive.setFont(new Font("SansSerif",Font.PLAIN,10));
+        yellowAlive.setBounds(431,90,80,15);
+        
         //Commits the initializes objects to THIS JPanel.----------------------
         this.add(messageBar);
         //Options buttons
@@ -263,6 +319,19 @@ public class Checkers
         //Yellow king image
         this.add(yellowKingPieceIcon);
         this.add(yellowKingPieceText);
+        //Game Statistics Section
+        this.add(gameStats);
+        this.add(redPlayer);
+        this.add(redCapturedLabel);
+        this.add(redCaptured);
+        this.add(redAliveLabel);
+        this.add(redAlive);
+        this.add(yellowPlayer);
+        this.add(yellowCapturedLabel);
+        this.add(yellowCaptured);
+        this.add(yellowAliveLabel);
+        this.add(yellowAlive);
+        
         
         //Tells this JPanel to listen to mouse input.--------------------------
         this.addMouseListener(this);
@@ -464,7 +533,8 @@ public class Checkers
 
     public void drawCheckers()
     {                   //paint checkers on the board
-       g=getGraphics();
+    	
+    	g=getGraphics();
 
         for(int i=0;i<8;i++)
         {
@@ -480,6 +550,11 @@ public class Checkers
                     g.drawImage(yellowKingIcon.getImage(),i*50,j*50,this);
             }
         }
+        evaluateScores();
+    	redCaptured.setText(String.valueOf(redCapturedCount));
+    	redAlive.setText(String.valueOf(redAliveCount));
+    	yellowCaptured.setText(String.valueOf(redCapturedCount));
+    	yellowAlive.setText(String.valueOf(redAliveCount));
     }
 
     public void undo()
@@ -768,6 +843,32 @@ public class Checkers
             //undoCount=0;
             //newGame();            
         }
+    }
+    void evaluateScores()
+    {
+    	int redCount = 0;
+    	int yellowCount = 0;
+    	for (int i = 0; i < 8; i++)
+    	{
+    		for (int j = 0; j < 8; j++)
+    		{
+    			if (board[i][j] == REDNORMAL || board[i][j] == REDKING)
+    			{
+    				redCount += 1;
+    			}
+    			if (board[i][j] == YELLOWNORMAL || board[i][j] == YELLOWKING)
+    			{
+    				yellowCount += 1;
+    			}
+    		}
+    	}
+    	redAliveCount = redCount;
+    	yellowAliveCount = yellowCount;
+    	if (redAliveCount != 0 || yellowAliveCount != 0)
+    	{
+    		yellowCapturedCount = 12 - redAliveCount;
+        	redCapturedCount = 12 - yellowAliveCount;
+    	}
     }
    // The AWT invokes the update() method in response to the repaint() method
    // calls that are made as a checker is dragged. The default implementation

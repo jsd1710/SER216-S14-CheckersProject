@@ -83,11 +83,6 @@ public class CheckerFrame extends JFrame implements ActionListener
     {
         if(e.getActionCommand().equalsIgnoreCase("Start Game")) //If the startButton is clicked:
         {
-        	/*
-        	 * This for some reason un-draws the Start Button 
-        	 * initially drawn and activates the New Game key?
-        	 */
-        	
 
             new PlaySound("src/sounds/button.wav").start(); //Plays the sound signifying a new game.
 
