@@ -553,8 +553,8 @@ public class Checkers
         evaluateScores();
     	redCaptured.setText(String.valueOf(redCapturedCount));
     	redAlive.setText(String.valueOf(redAliveCount));
-    	yellowCaptured.setText(String.valueOf(redCapturedCount));
-    	yellowAlive.setText(String.valueOf(redAliveCount));
+    	yellowCaptured.setText(String.valueOf(yellowCapturedCount));
+    	yellowAlive.setText(String.valueOf(yellowAliveCount));
     }
 
     public void undo()
