@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.awt.*;
+import java.util.TimerTask;
 
 @SuppressWarnings("serial")
 public class Checkers 
@@ -12,8 +13,9 @@ public class Checkers
 {
 
     Graphics g;
-
+    Timer timer;
     JTextArea messageBar = new JTextArea("To begin, click the 'New Game' button.");
+    boolean firstGameStart = false;
     
     //Buffered images for future use as icons.
     ImageIcon redNormalIcon = new ImageIcon(new ImageIcon(getClass().getResource("/images/red_normal.jpg")).getImage());
@@ -82,6 +84,9 @@ public class Checkers
     JLabel 	yellowAliveLabel = new JLabel("Alive:");
     JLabel 	yellowAlive = new JLabel("0");
     int		yellowAliveCount = 0;
+    
+    JLabel  timerLbl = new JLabel("Timer: 0");
+    int 	timerCount = 0;
     
     String selectedColor;
     int selectedMode;
@@ -289,7 +294,12 @@ public class Checkers
         yellowAlive.setFont(new Font("SansSerif",Font.PLAIN,10));
         yellowAlive.setBounds(431,90,80,15);
         
+        timerLbl.setFont(new Font("SansSerif",Font.PLAIN,10));
+        timerLbl.setBounds(403,110,80,15);
+        
         //Commits the initializes objects to THIS JPanel.----------------------
+        this.add(timerLbl);
+        
         this.add(messageBar);
         //Options buttons
         this.add(newGameButton);        
@@ -474,6 +484,25 @@ public class Checkers
         //Yellow takes the first move in both modes
         //If someone wants to move secondly, red has to be selected
         //Yellow is always at the bottom of the board
+    	
+    	timerCount = 0;
+    
+    	if(firstGameStart == false){
+    	
+        new java.util.Timer().schedule( 
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        timerCount +=1;
+                        timerLbl.setText("Timer:" + Integer.toString(timerCount));
+                        
+                    }
+                },1, 
+                1000 
+        );
+        firstGameStart = true;
+        
+    	}
 
         selectedColor = redRadioButton.isSelected() ? "red" : "yellow";
         selectedMode = p1RadioButton.isSelected() ? 1 : 2;
@@ -529,7 +558,16 @@ public class Checkers
         update(getGraphics());
         drawCheckers();
         showStatus();
-    }
+        //timer.stop();
+        //timer = new Timer();  //At this line a new Thread will be created
+       // timer.schedule(Clock(), 1*1000); //delay in milliseconds
+        
+
+        
+
+ }
+    
+ 
 
     public void drawCheckers()
     {                   //paint checkers on the board
